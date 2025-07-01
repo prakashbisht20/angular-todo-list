@@ -1,19 +1,21 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-
-import { Todo } from 'src/app/Todo';
+import { CommonModule } from '@angular/common';
+import {FormsModule} from '@angular/forms'
+import { Todo } from '../todo';
 
 @Component({
   selector: 'app-todo-item',
-  templateUrl: './todo-item.component.html',
-  styleUrls: ['./todo-item.component.css']
+  imports: [CommonModule, FormsModule],
+  templateUrl: './todo-item.html',
+  styleUrl: './todo-item.css'
 })
-export class TodoItemComponent implements OnInit {
-  @Input() todo: Todo;
-  @Input() i: number;
+export class TodoItem implements OnInit {
+  @Input() todo: Todo | undefined;
+  @Input() i: number | undefined;
   @Output() todoDelete: EventEmitter<Todo> = new EventEmitter();
   @Output() todoCheckbox: EventEmitter<Todo> = new EventEmitter();
 
-  constructor() { }
+   constructor() { }
 
   ngOnInit(): void {
   }
@@ -21,7 +23,7 @@ export class TodoItemComponent implements OnInit {
     this.todoDelete.emit(todo);
     console.log("onClick has been triggerd")
   }
-  onCheckboxClick(todo){
+  onCheckboxClick(todo: Todo | undefined){
     console.log(todo)
     this.todoCheckbox.emit(todo);
   }

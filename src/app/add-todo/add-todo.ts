@@ -1,12 +1,15 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { Todo } from 'src/app/Todo';
+import { CommonModule } from '@angular/common';
+import {FormsModule} from '@angular/forms'
+import { Todo } from '../todo'
 
 @Component({
   selector: 'app-add-todo',
-  templateUrl: './add-todo.component.html',
-  styleUrls: ['./add-todo.component.css']
+  imports: [CommonModule,FormsModule],
+  templateUrl: './add-todo.html',
+  styleUrl: './add-todo.css'
 })
-export class AddTodoComponent implements OnInit {
+export class AddTodo implements OnInit {
   title:string;
   desc:string;
   @Output() todoAdd: EventEmitter<Todo> = new EventEmitter();
@@ -23,7 +26,9 @@ export class AddTodoComponent implements OnInit {
       active: true
     }
     this.todoAdd.emit(todo);
-
+    this.title='';
+    this.desc='';
   }
 
 }
+
